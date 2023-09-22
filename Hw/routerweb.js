@@ -1,44 +1,50 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 
-const books = new Map();
-books.set("1", {
-  id: "1",
-  title: "The Hound of the Baskervilles",
-  author: "Conan Doyle, Arthur",
-});
-books.set("2", {
-  id: "2",
-  title: "The Old Man",
-  author: "Lee Ear",
-});
+
 const router = new Router();
 router
   .get("/", (context) => {
     context.response.body = "Hello world!";
   })
-  .get("/nqu", (context) => {
-    ctx.response.body=`
+  .get("/nqu/", (context) => {
+    context.response.body=`
     <html>
       <body>
         <a href="https://www.nqu.edu.tw/">金門大學</a>
       </body>
     </html>`
   })
-  .get("/nqu/csie", (context) => {
-    ctx.response.body=`
+  .get("/nqu/csie/", (context) => {
+    context.response.body=`
     <html>
       <body>
         <a href="https://csie.nqu.edu.tw/">金門大學資工系</a>
       </body>
     </html>`
   })
-  .get("/to/nqu/csie", (context) => {
-    ctx.response.body=
+  .get("/to/nqu/csie/", (context) => {
+    context.response.body=
         ctx.response.redirect('https://csie.nqu.edu.tw/')
   })
-  .get("/to/nqu", (context) => {
-    ctx.response.body=
+  .get("/to/nqu/", (context) => {
+    context.response.body=
         ctx.response.redirect('https://www.nqu.edu.tw/')
+  })
+  .get("/room/e320", (context) => {
+    context.response.body=`
+    <html>
+      <body>
+        <p>多媒體教室</p>
+      </body>
+    </html>`
+  })
+  .get("/room/e319", (context) => {
+    context.response.body=`
+    <html>
+      <body>
+        <p>嵌入式實驗室</p>
+      </body>
+    </html>`
   });
 
 const app = new Application();
