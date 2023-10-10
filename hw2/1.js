@@ -32,7 +32,7 @@ router
       let pass = params['pass']
       console.log(`name=${name} pass=${pass}`)
       if (peoples.get(name)) {
-        ctx.response.body = {'error':`name=${name} 已經存在！`}
+        ctx.response.body = '此帳號已存在'
       } else {
         peoples.set(name, {name, pass})
         ctx.response.type = 'text/html'
