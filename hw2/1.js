@@ -32,7 +32,8 @@ router
       let pass = params['pass']
       console.log(`name=${name} pass=${pass}`)
       if (peoples.get(name)) {
-        ctx.response.body = '此帳號已存在'
+        ctx.response.type = 'text/html'
+        ctx.response.body = `<p>此帳號已存在</p><p><a href="http://127.0.0.1:8000/public/add.html">註冊</a></p>`
       } else {
         peoples.set(name, {name, pass})
         ctx.response.type = 'text/html'
@@ -61,9 +62,9 @@ router
       } 
       else {
         ctx.response.type = 'text/html'
-        ctx.response.body = `<p>登入失敗</p><p><a href="http://127.0.0.1:8000/public/find.html">登入</a></p>`
+        ctx.response.body = `<p>登入失敗</p><p><a href="http://127.0.0.1:8000/public/find.html">重新登入</a></p>`
       }
-      console.log("key:",peoples.get(name).pass)
+      //console.log("key:",peoples.get(name).pass)
   }
 })
   .get("/public/(.*)", async (ctx) => {
