@@ -31,15 +31,20 @@ router
       let name = params['name']
       let pass = params['pass']
       console.log(`name=${name} pass=${pass}`)
-      if (peoples.get(name)) {
+      if (!name || !pass){
         ctx.response.type = 'text/html'
-        ctx.response.body = `<p>此帳號已存在</p><p><a href="http://127.0.0.1:8000/public/add.html">註冊</a></p>`
-      } else {
-        peoples.set(name, {name, pass})
-        ctx.response.type = 'text/html'
-        ctx.response.body = `<p>註冊成功</p><p><a href="http://127.0.0.1:8000/public/find.html">登入</a></p>`
+        ctx.response.body = `<p>帳號或密碼不能為空</p><p><a href="http://127.0.0.1:8000/public/add.html">註冊</a></p>`
       }
-  
+      else{
+        if (peoples.get(name)) {
+          ctx.response.type = 'text/html'
+          ctx.response.body = `<p>此帳號已存在</p><p><a href="http://127.0.0.1:8000/public/add.html">註冊</a></p>`
+        } else {
+          peoples.set(name, {name, pass})
+          ctx.response.type = 'text/html'
+          ctx.response.body = `<p>註冊成功</p><p><a href="http://127.0.0.1:8000/public/find.html">登入</a></p>`
+        }
+    }
     }
 
   })
