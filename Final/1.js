@@ -63,15 +63,14 @@ router
       console.log(`name=${name} pass=${pass}`)
       if (peoples.get(name) && pass==peoples.get(name).pass) {
         ctx.response.type = 'text/html'
-        ctx.response.body = '登入成功'
-        ctx.response.redirect('https://s111110512.github.io/wp111b/HW/HW(F).html')
+        ctx.response.body = `<p>登入成功</p><p><a href="http://127.0.0.1:8000/public/snake.html">GO</a></p>`
       } 
       else {
         ctx.response.type = 'text/html'
         ctx.response.body = `<p>登入失敗</p><p><a href="http://127.0.0.1:8000/public/find.html">重新登入</a></p>`
       }
       //console.log("key:",peoples.get(name).pass)
-  }
+  } 
 })
   .get("/public/(.*)", async (ctx) => {
     let wpath = ctx.params[0]
@@ -81,6 +80,12 @@ router
       index: "index.html",
     })
   })
+  .get("/snake", async (ctx) => {
+    await send(ctx, "snake.html", {
+      root: Deno.cwd() + "/public/",
+      index: "snake.html",
+    });
+  });
 
 const app = new Application();
 
